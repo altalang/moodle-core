@@ -1308,7 +1308,7 @@ class completion_info {
         global $DB;
 
         list($enrolledsql, $enrolledparams) = get_enrolled_sql(
-                context_course::instance($this->course->id), 'moodle/course:isincompletionreports', $groupid, true);
+                context_course::instance($this->course->id), 'moodle/course:isincompletionreports', $groupid, false);
         $sql  = 'SELECT COUNT(eu.id) FROM (' . $enrolledsql . ') eu JOIN {user} u ON u.id = eu.id';
         if ($where) {
             $sql .= " WHERE $where";
@@ -1340,7 +1340,7 @@ class completion_info {
 
         list($enrolledsql, $params) = get_enrolled_sql(
                 context_course::instance($this->course->id),
-                'moodle/course:isincompletionreports', $groupid, true);
+                'moodle/course:isincompletionreports', $groupid, false);
 
         // TODO Does not support custom user profile fields (MDL-70456).
         $userfieldsapi = \core_user\fields::for_identity($extracontext, false)->with_name();
